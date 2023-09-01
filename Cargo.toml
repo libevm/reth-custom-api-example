@@ -1,0 +1,22 @@
+[package]
+name = "reth-custom-api-example"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.75"
+clap = "4.4.2"
+ethers = "2.0.9"
+eyre = "0.6.8"
+jsonrpsee = "0.20.0"
+reth = { git = "https://github.com/paradigmxyz/reth", rev = "eb4126b78daf6358a9b7ea28212d4f217093a7dc" }
+reth-primitives = { git = "https://github.com/paradigmxyz/reth", rev = "eb4126b78daf6358a9b7ea28212d4f217093a7dc" }
+reth-transaction-pool = { git = "https://github.com/paradigmxyz/reth", rev = "eb4126b78daf6358a9b7ea28212d4f217093a7dc" }
+serde = "1.0.188"
+tracing = "0.1.37"
+
+[patch.crates-io]
+revm = { git = "https://github.com/bluealloy/revm/", branch = "release/v25" }
+revm-primitives = { git = "https://github.com/bluealloy/revm/", branch = "release/v25" }
