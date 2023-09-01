@@ -12,10 +12,13 @@ ethers = "2.0.9"
 eyre = "0.6.8"
 jsonrpsee = "0.20.0"
 reth = { git = "https://github.com/paradigmxyz/reth", rev = "eb4126b78daf6358a9b7ea28212d4f217093a7dc" }
+reth-provider = { git = "https://github.com/paradigmxyz/reth", rev = "eb4126b78daf6358a9b7ea28212d4f217093a7dc" }
 reth-primitives = { git = "https://github.com/paradigmxyz/reth", rev = "eb4126b78daf6358a9b7ea28212d4f217093a7dc" }
 reth-transaction-pool = { git = "https://github.com/paradigmxyz/reth", rev = "eb4126b78daf6358a9b7ea28212d4f217093a7dc" }
 serde = "1.0.188"
 tracing = "0.1.37"
+tokio = "1.32.0"
+rand = "0.8.5"
 
 [patch.crates-io]
 revm = { git = "https://github.com/bluealloy/revm/", branch = "release/v25" }
