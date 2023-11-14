@@ -2,18 +2,12 @@ mod apis;
 
 use apis::gasused::{CustomEthNamespaceExt, CustomEthNamespaceServer};
 use clap::Parser;
-use reth::{
-    cli::{
-        config::RethRpcConfig,
-        ext::{RethCliExt, RethNodeCommandConfig},
-        Cli,
-    },
-    network::{NetworkInfo, Peers},
-    providers::{BlockReaderIdExt, CanonStateSubscriptions, ReceiptProvider},
-    rpc::builder::{RethModuleRegistry, TransportRpcModules},
-    tasks::TaskSpawner,
+use reth::cli::components::{RethNodeComponents, RethRpcComponents};
+use reth::cli::{
+    config::RethRpcConfig,
+    ext::{RethCliExt, RethNodeCommandConfig},
+    Cli,
 };
-use reth_transaction_pool::TransactionPool;
 use tracing::info;
 
 // ---- CLI Args ----
@@ -33,24 +27,22 @@ struct RethExtended {
 
 impl RethNodeCommandConfig for RethExtended {
     // This is the entrypoint for the CLI to extend the RPC server with custom rpc namespaces.
-    fn extend_rpc_modules<Conf, Provider, Pool, Network, Tasks, Events>(
+    fn extend_rpc_modules<Conf, Reth>(
         &mut self,
         _config: &Conf,
-        registry: &mut RethModuleRegistry<Provider, Pool, Network, Tasks, Events>,
-        modules: &mut TransportRpcModules,
+        components: &Reth,
+        rpc_components: RethRpcComponents<'_, Reth>,
     ) -> eyre::Result<()>
     where
         Conf: RethRpcConfig,
-        Provider: BlockReaderIdExt + ReceiptProvider + Clone + Unpin + 'static,
-        Pool: TransactionPool + Clone + 'static,
-        Network: NetworkInfo + Peers + Clone + 'static,
-        Tasks: TaskSpawner + Clone + 'static,
-        Events: CanonStateSubscriptions + Clone + 'static,
+        Reth: RethNodeComponents,
     {
         if self.extend_eth_namespace {
-            let provider = registry.provider().clone();
+            let provider = components.provider();
             let bundle_ext = CustomEthNamespaceExt::new(provider);
-            modules.merge_configured(bundle_ext.into_rpc())?;
+            rpc_components
+                .modules
+                .merge_configured(bundle_ext.into_rpc())?;
             info!("Custom ETH Namespace enabled!");
         }
 

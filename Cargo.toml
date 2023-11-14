@@ -11,10 +11,9 @@ clap = "4.4.2"
 ethers = "2.0.9"
 eyre = "0.6.8"
 jsonrpsee = "0.20.0"
-reth = { git = "https://github.com/paradigmxyz/reth", rev = "eb4126b78daf6358a9b7ea28212d4f217093a7dc" }
-reth-provider = { git = "https://github.com/paradigmxyz/reth", rev = "eb4126b78daf6358a9b7ea28212d4f217093a7dc" }
-reth-primitives = { git = "https://github.com/paradigmxyz/reth", rev = "eb4126b78daf6358a9b7ea28212d4f217093a7dc" }
-reth-transaction-pool = { git = "https://github.com/paradigmxyz/reth", rev = "eb4126b78daf6358a9b7ea28212d4f217093a7dc" }
+reth = { git = "https://github.com/paradigmxyz/reth", rev = "4865e59684fbf1457125feec0c06a30405bf4b60" }
+reth-provider = { git = "https://github.com/paradigmxyz/reth", rev = "4865e59684fbf1457125feec0c06a30405bf4b60" }
+reth-primitives = { git = "https://github.com/paradigmxyz/reth", rev = "4865e59684fbf1457125feec0c06a30405bf4b60" }
 serde = "1.0.188"
 tracing = "0.1.37"
 tokio = "1.32.0"
